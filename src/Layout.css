@@ -1,0 +1,33 @@
+.layout-page {
+  display: flex;
+}
+
+.sidebarComponent {
+  width: 350px;
+  flex-shrink: 0;
+}
+
+.content-area {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.main-page {
+  flex: 1;
+  overflow: hidden;
+  padding-top: 80px;
+}
+
+@media (max-width: 1530px) {
+  .main-page {
+    padding-top: 60px;
+  }
+}
+
+@media (max-width: 1430px) {
+  .sidebarComponent {
+    width: 300px;
+  }
+}

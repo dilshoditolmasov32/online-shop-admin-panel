@@ -1,0 +1,50 @@
+.product-selector{
+    display: block;
+    width: 100%;
+}
+
+
+.category-page{
+    width: 100%;
+}   
+
+.category-wrapper > * {
+  flex: 1;
+}
+
+
+.category-page ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category-list {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;  
+
+}
+
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+
+.image-container {
+  flex: 0 0 auto; 
+  width: 170px;  
+  margin-top: 20px;  
+   
+}
+
+.input-container {
+  flex: 1;  
+
+}
+

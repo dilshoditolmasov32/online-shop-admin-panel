@@ -1,0 +1,100 @@
+.accordion-menu h3 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 22px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: #10355b;
+  margin-bottom: 20px;
+  font-family: "Neometric";
+}
+
+.accordion-menu {
+  border: 1px solid #b9b9b9;
+  background: #ecedef;
+  border-radius: 10px;
+  padding: 20px;
+  min-height: 90vh;
+  padding-bottom: 80px;
+}
+
+.price-sort {
+  margin-top: 50px;
+}
+
+.price-sort h4 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 22px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: #10355b;
+  margin-bottom: 20px;
+}
+.price-container {
+  display: flex;
+  gap: 6px;
+}
+
+.subcategory-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  width: 100%;
+  transition: color 0.5s ease-in-out,
+}
+
+.subcategory-list:hover p {
+  color: #000000;
+}
+
+.subcategory-list p:active {
+  color: #000000;
+}
+
+.subcategory-list p {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: #7d7d7d;
+  width: 100%;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+@media (max-width: 1710px) {
+  .accordion-menu {
+    max-width: 350px;
+    width: 100%;
+    padding-bottom: 80px;
+  }
+
+  .price-sort {
+    margin-top: 40px;
+  }
+
+  .price-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 1510px) {
+  .accordion-menu {
+    max-width: 300px;
+    width: 100%;
+    padding-bottom: 80px;
+  }
+
+  .accordion-menu h3, .price-sort h4 {
+  font-size: 18px;
+}
+
+.subcategory-list p{
+  font-size: 15px;
+}
+}

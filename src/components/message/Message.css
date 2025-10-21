@@ -1,0 +1,68 @@
+.message-lists {
+  width: 100%;
+}
+
+.message-data {
+  min-height: 500px;
+  flex: 1;
+  overflow: hidden;
+  background: #ecedef;
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.text-title {
+  display: block;
+  white-space: nowrap;
+  width: fit-content;
+  font-size: 16px;
+  letter-spacing: 0%;
+  padding: 4px 7px;
+  margin-bottom: 10px;
+  border: 1px solid #000000;
+  border-radius: 6px;
+  text-align: center;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-title p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #636363;
+  margin-bottom: 10px;
+}
+
+.message-data ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  padding: 8px 10px;
+  border: 1px solid #b9b9b9;
+  background: #f3f3f3;
+  font-size: 16px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+}
+
+.social-network {
+  color: #000000;
+  font-size: 16px;
+  font-family: "Neometric";
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.social-contract {
+  padding: 6px;
+  background: #10355b;
+  color: #f3f3f3;
+  border-radius: 6px;
+  font-size: 16px;
+}

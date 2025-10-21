@@ -1,0 +1,131 @@
+.header-section {
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 23px 20px;
+  box-shadow: 0px 4px 10px 0px #00000014;
+  z-index: 1000;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.navbar-search__menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar__search {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid #10355b;
+  border-radius: 6px;
+  padding: 10px 15px;
+}
+
+.navbar__search input {
+  outline: none;
+  border: none;
+  text-transform: lowercase;
+  font-size: 16px;
+  color: #10355b;
+  border-radius: 6px;
+}
+
+.navbar__search input::placeholder {
+  font-size: 16px;
+  line-height: 100%;
+  color: #10355b;
+}
+
+.search-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background: none;
+  outline: none;
+  border: none;
+  color: #10355b;
+  font-size: 17px;
+  padding: 0;
+}
+
+.search-btn .search-icon {
+  font-size: 17px;
+}
+
+.hisobnoma {
+  width: 100%;
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.settings {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.counter-summa span {
+  font-weight: 700;
+  font-style: Extra Bold;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #000;
+  margin-left: 8px;
+}
+
+.setting-link {
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #000;
+  padding: 10px 15px;
+  border: 1px solid #000000;
+  border-radius: 6px;
+}
+
+.newCompony-add {
+  padding: 10px;
+  height: 40px;
+  background: #10355b;
+  border-radius: 6px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  border: 1px solid #ffffff;
+}
+
+.newCompony-add span {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #ffffff;
+  margin-bottom: -2px;
+}
+
+.plus-icon {
+  color: #ffffff;
+  background-color: #10355b;
+}
+
+@media screen and (max-width: 1540px) {
+  .counter-summa {
+    display: none;
+  }
+  .counter-summa span {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1260px) {
+  .hisobnoma {
+    display: none;
+  }
+}

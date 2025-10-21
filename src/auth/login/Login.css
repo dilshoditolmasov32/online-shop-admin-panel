@@ -1,0 +1,101 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background: var(--secondary-color);
+}
+
+.login-form{
+  max-width: 450px;
+  width: 100%;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 24px 20px;
+  margin-bottom: 15px;
+  border-radius: var(--border-radius);
+  font-size: var(--secondary-font-size);
+  background-color: var(--three-color);
+  color: var(--text-color);
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--three-color) inset !important;
+  -webkit-text-fill-color: var(--text-color) !important;
+}
+
+.login-form
+  input[type="text"]::placeholder
+  .login-form
+  input[type="email"]::placeholder {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--secondary-font-size);
+  color: var(--secondary-color);
+  line-height: 117%;
+  letter-spacing: 0%;
+}
+
+.password-input {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.password-input img {
+  position: absolute;
+  right: 10px;
+  top: 25px;
+  cursor: pointer;
+   transition: opacity 0.2s;
+}
+
+
+.eye-icon:hover img {
+  opacity: 0.8;
+
+}
+
+#login-btn {
+  color: var(--three-color);
+  width: 100%;
+  padding: 24px 20px;
+  border-radius: var(--border-radius);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--secondary-font-size);
+  line-height: 117%;
+  letter-spacing: 0%;
+}
+
+#login-btn:disabled {
+  background-color: #aaaaaa;
+  cursor: not-allowed;
+}
+
+#login-btn:not(:disabled) {
+  background-color: var(--primary-color);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer-title {
+  position: fixed;
+  bottom: 0;
+  padding: 25px 0;
+  background-color: #bcbcbc;
+  width: 100%;
+  text-align: center;
+  color: var(--text-color);
+  font-size: 24px;
+  font-weight: var(--font-weight-normal);
+}

@@ -1,0 +1,7 @@
+.warehouse-page {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  border-top: 1px solid #b9b9b9;
+}
+

@@ -1,0 +1,127 @@
+.profil-page {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+
+.profilImg-container {
+  width: 350px;
+  height: 380px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #4d739b;
+  border-radius: 16px;
+  background: #4d739b;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+#profil-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profil-photo {
+  position: relative;
+  display: inline-block;
+}
+
+#photo-upload {
+  position: absolute;
+  width: 155px;
+  height: 155px;
+  border-radius: 10px;
+  border: none;
+  border-radius: 50%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.profil-photo h3 {
+  font-weight: 600;
+  line-height: 20.05px;
+  letter-spacing: -0.37px;
+  color: #000000;
+  font-size: 18px;
+}
+.profil-data {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  padding-top: 30px;
+}
+
+.data-item {
+  margin-bottom: 8px;
+}
+
+.data-item label {
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20.05px;
+  letter-spacing: -0.37px;
+  margin-bottom: 4px;
+  color: #10355b;
+  font-size: 16px;
+}
+
+.data-item input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 10px;
+  background: white;
+  font-size: 14px;
+  border: 1px solid #b9b9b9;
+  padding: 16px 20px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 20.05px;
+  letter-spacing: -0.37px;
+}
+
+.data-item input[readonly] {
+  background: #fff;
+  cursor: not-allowed;
+}
+
+.edit-btn {
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  line-height: 20.05px;
+  letter-spacing: -0.37px;
+}
+
+/* **** RESPONSIVE CODES ****  */
+@media screen and (max-width: 1600px) {
+  .profil-page {
+    display: flex;  
+    gap: 15px;
+  }
+
+
+  .profil-data {
+    padding-top: 28px;
+  }
+}
+
+
+@media screen and (max-width:1500px) {
+  .profilImg-container {
+  width: 304px;
+  height: 304px;
+  
+}
+
+.profil-data {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 0;
+}
+}

@@ -1,0 +1,14 @@
+.home {
+  border-top: 1px solid #b9b9b9;
+  margin-bottom: 20px;
+}
+
+.lists {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 10px;
+  padding: 10px 20px;
+}

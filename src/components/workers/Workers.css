@@ -1,0 +1,80 @@
+.worker-lists {
+  width: 100%;
+  flex: 1;
+}
+.workers-data {
+  min-height: 500px;
+  padding: 12px;
+  background: #ecedef;
+  border-radius: 6px;
+  flex: 1;
+}
+
+.xodimlar-text {
+  width: 123px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  letter-spacing: 0%;
+
+  margin-bottom: 10px;
+  border: 1px solid #000000;
+  border-radius: 6px;
+}
+
+.workers-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.workers-title p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #636363;
+}
+
+.workers-data ul li {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  padding: 8px 10px;
+  border: 1px solid #b9b9b9;
+  background: #f3f3f3;
+  font-size: 16px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+}
+
+.worker-fullName {
+  flex: 1;
+  color: #000000;
+  font-size: 16px;
+  font-family: "Neometric";
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.worker-contract {
+  flex: 1;
+  padding: 6px;
+  background-color: #fff;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.worker-product {
+  flex: 1;
+  padding: 6px 5px;
+  background: #10355b;
+  color: #fff;
+  border-radius: 6px;
+}

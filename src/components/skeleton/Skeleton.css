@@ -1,0 +1,38 @@
+.skeleton{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 170px;
+  width: 100%;
+}
+
+.skeleton-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #ddd;
+  animation: pulse 1.5s infinite;
+}
+
+.skeleton-header,
+.skeleton-footer {
+  width: 84cqh;
+  height: 70px;
+  background-color: #ddd;
+  animation: pulse 1.5s infinite;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+

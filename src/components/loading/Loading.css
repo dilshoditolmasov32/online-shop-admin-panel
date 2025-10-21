@@ -1,0 +1,39 @@
+.skeleton__wrapper {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  grid-auto-rows: 1fr;
+  margin-bottom: 50px;
+}
+
+.skeleton__image {
+  gap: 20px;
+  width: 210px;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.skeleton__title,
+.skeleton__btn {
+  width: 210px;
+  height: 20px;
+  background: #ddd;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.skeleton__btn{
+    width: 180px;
+}
+
+.skeleton__anime {
+  background: linear-gradient(90deg, #f7f7f7, #ddd, #f7f7f7);
+  background-size: 200%;
+  animation: skeletonAnime 1s linear 0s infinite;
+}
+
+@keyframes skeletonAnime {
+  to {
+    background-position: 200%;
+  }
+}

@@ -1,0 +1,74 @@
+.sidebar-profile {
+  border-bottom: 2px solid #ffffff;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.sidebar-user__component {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.user-image {
+  padding: 14px;
+  background: #4d739b;
+  border-radius: 16px;
+  display: flex;
+}
+
+.user-image input{
+  border-radius: 16px;
+}
+
+.adminUser-data{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+
+
+.adminUser-data button {
+  display: inline-block;
+  font-size: 16px;
+  text-transform: capitalize;
+  color: #10355b;
+  padding: 6px 9px;
+  background: #fff;
+  border-radius: 6px;
+}
+
+.adminUser-data h4 {
+  font-size: 20px;
+  text-transform: capitalize;
+  color: #fff;
+}
+
+
+@media screen and (max-width: 1500px) {
+ .adminUser-data{
+  display: flex;
+  gap: 10px;
+}
+
+
+  .user-image {
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  .adminUser-data span {
+    font-size: 12px;
+    padding: 5px 7px;
+  }
+
+  .adminUser-data h4 {
+    font-size: 16px;
+  }
+
+ 
+}

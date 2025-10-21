@@ -1,0 +1,119 @@
+.productId-page {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  border-top: 1px solid #10355b;
+  padding-bottom: 180px;
+}
+
+.productId-sidebar {
+  border: 1px solid #b9b9b9;
+  height: 100vh;
+  padding: 10px;
+
+  background-color: #ecedef;
+  border-radius: 10px;
+}
+
+.productId-card-column {
+  background: #f9f9f9;
+  border-radius: 8px;
+  flex-shrink: 0;
+  width: 370px;
+  flex-shrink: 0;
+}
+
+.productId-card-header {
+  background: #ecedef;
+  border: 1px solid #10355b;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.productId-card-header p {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.productId-card-meta {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+  width: 100%;
+}
+
+
+
+
+.productId-card-meta div {
+  background: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #000;
+  border: 1px solid #b9b9b9;
+}
+.productId-summa-card{
+  width: 100%;
+}
+
+.productId-buyurtma{
+  width: 200px;
+}
+
+
+.productId-card-meta p {
+  color: #000;
+  font-weight: 400;
+}
+
+.productId-card-meta span {
+  font-weight: 700;
+  font-size: 20px;
+  color: #000;
+}
+
+.productId-card-card {
+  border: 1px solid #10355b;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.card-header strong {
+  font-size: 20px;
+}
+
+.card-header span {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.productId-card-card .card-meta span{
+  border: 1px solid #10355B; 
+  padding: 4px 6px 3px;
+  border-radius: 6px;
+border-image-source: linear-gradient(0deg, #000000, #000000),
+linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+
+
+}
+.productId-card-card .card-meta .date-time{
+  display: flex;
+  gap: 5px;
+}

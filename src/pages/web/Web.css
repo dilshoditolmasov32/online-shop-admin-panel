@@ -1,0 +1,8 @@
+.web-page {
+  display: flex;
+  border-top: 2px solid #b9b9b9;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  overflow-y: auto;
+}

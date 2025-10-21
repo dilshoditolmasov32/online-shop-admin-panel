@@ -1,0 +1,28 @@
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #0a3b72, #0e5ba0);
+  animation: fadeOut 0.6s ease-in-out forwards;
+  animation-delay: 1.8s; 
+}
+
+.logo {
+  font-weight: 900;
+  color: white;
+  background: white;
+  color: var(--primary-color);
+  border-radius: 60px 0;
+  text-transform: lowercase;
+  font-family: var(--font-family);
+  padding: 60px 64px;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

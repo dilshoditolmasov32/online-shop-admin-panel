@@ -1,0 +1,89 @@
+.editProduct-page {
+  width: 100%;
+}
+
+.product-name-count,
+.product-brand,
+.product-code,
+.product-price {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.product-title,
+.product-state {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 38px;
+  vertical-align: middle;
+  color: #000;
+  margin-bottom: 5px;
+  margin-top: 20px;
+}
+
+.product-checkbox {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+.new-product {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border: 1px solid #b9b9b9;
+  border-radius: 9px;
+  width: 100%;
+}
+
+.new-product h3 {
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 20px;
+  line-height: 20.05px;
+  letter-spacing: -0.37px;
+}
+.checkbox-wrapper {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 100%;
+  background: #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 7px;
+}
+
+.check-icon {
+  position: absolute;
+  left: 6px;
+  top: 7px;
+  width: 16px;
+  height: 12px;
+  display: none;
+  pointer-events: none;
+}
+
+.custom-checkbox:checked + .check-icon {
+  display: block;
+}
+
+@media (max-width: 1500px) {
+  .product-title,
+  .product-state {
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: 10px;
+  }
+}
