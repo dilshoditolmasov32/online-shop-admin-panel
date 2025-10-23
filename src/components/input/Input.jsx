@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Slide, toast } from "react-toastify";
 import "./Input.css";
+import { useMask } from "@react-input/mask";
 
 const Input = ({
   title,
@@ -17,6 +18,8 @@ const Input = ({
   const [isEditing, setIsEditing] = useState(false);
 
   const handleToggleEdit = () => {
+   
+    
     if (isEditing) {
       toast.success("Ma'lumot muvaffaqiyatli o‘zgartirildi", {
         position: "bottom-right",
@@ -42,6 +45,15 @@ const Input = ({
     setIsEditing(!isEditing);
   };
 
+
+     const inputRef =
+    type === "tel" || name === "phone"
+      ? useMask({
+          mask: "+998 (__) ___-__-__",
+          replacement: { _: /\d/ },
+        })
+      : null;
+
   return (
     <>
       <form className="input-component" id="myForm">
@@ -49,6 +61,7 @@ const Input = ({
 
         <div className="my-input-style">
           <input
+          // ref={inputRef}
             type={type}
             {...(register && name ? register(name) : {})}
             {...props}

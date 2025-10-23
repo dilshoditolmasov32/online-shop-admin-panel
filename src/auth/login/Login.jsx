@@ -14,7 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const inputRef = useMask({
-    mask: "+998 (__) ___-__-__",
+    mask: "+998 (__) ___ __ __",
     replacement: { _: /\d/ },
   });
 
@@ -30,6 +30,7 @@ const Login = () => {
       password: passwordValue,
     });
     navigate("/dashboard");
+  
   };
 
   return (
@@ -38,7 +39,9 @@ const Login = () => {
         <LoadingScreen />
       ) : (
         <div className="login-page">
-          <form className="login-form" onSubmit={handleSubmit}>
+          <form className="login-form" 
+          // onClick={handleSubmit}
+          >
             <input
               type="text"
               placeholder="Номер телефона*"
@@ -68,9 +71,10 @@ const Login = () => {
             </div>
 
             <button
-              type="submit"
+              type="button"
               id="login-btn"
               disabled={!phoneValue || !passwordValue}
+              onClick={handleSubmit}
             >
               Войти
             </button>
