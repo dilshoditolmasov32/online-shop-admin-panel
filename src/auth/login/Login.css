@@ -8,7 +8,7 @@
   background: var(--secondary-color);
 }
 
-.login-form{
+.login-form {
   max-width: 450px;
   width: 100%;
 }
@@ -25,7 +25,6 @@
   outline: none;
   border: none;
   box-sizing: border-box;
-
 }
 
 input:-webkit-autofill {
@@ -33,10 +32,8 @@ input:-webkit-autofill {
   -webkit-text-fill-color: var(--text-color) !important;
 }
 
-.login-form
-  input[type="text"]::placeholder
-  .login-form
-  input[type="email"]::placeholder {
+.login-form input[type="text"]::placeholder,
+.login-form input[type="password"]::placeholder {
   font-family: var(--font-family);
   font-weight: var(--font-weight-normal);
   font-size: var(--secondary-font-size);
@@ -52,18 +49,16 @@ input:-webkit-autofill {
   position: relative;
 }
 
-.password-input img {
+.eye-icon {
   position: absolute;
   right: 10px;
   top: 25px;
   cursor: pointer;
-   transition: opacity 0.2s;
+  transition: opacity 0.2s;
 }
-
 
 .eye-icon:hover img {
   opacity: 0.8;
-
 }
 
 #login-btn {

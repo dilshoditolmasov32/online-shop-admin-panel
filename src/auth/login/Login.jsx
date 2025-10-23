@@ -1,33 +1,36 @@
 import { useEffect, useState } from "react";
 import hideEyeIcon from "../../assets/images/hideEyeIcon.png";
 import viewEyeIcon from "../../assets/images/viewEyeIcon.png";
-
 import "./Login.css";
 import { LoadingScreen } from "../../components";
 import { useNavigate } from "react-router-dom";
+import { useMask } from "@react-input/mask";
+
 const Login = () => {
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [phoneValue, setPhoneValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
   const navigate = useNavigate();
+
+  const inputRef = useMask({
+    mask: "+998 (__) ___-__-__",
+    replacement: { _: /\d/ },
+  });
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("navigate");
-    if (phone && password) {
-      localStorage.setItem("isAuth", "true")
-      navigate("/dashboard");
-    }
+    console.log("Kirish ma'lumotlari:", {
+      phone: phoneValue,
+      password: passwordValue,
+    });
+    navigate("/dashboard");
   };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <>
@@ -35,53 +38,44 @@ const Login = () => {
         <LoadingScreen />
       ) : (
         <div className="login-page">
-          <form className="login-form">
+          <form className="login-form" onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Номер телефона*"
-              required
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              ref={inputRef}
+              value={phoneValue}
+              onChange={(e) => setPhoneValue(e.target.value)}
             />
+
             <div className="password-input">
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Пaроль*"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={passwordValue}
+                onChange={(e) => setPasswordValue(e.target.value)}
               />
-
               <span
                 className="eye-icon"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? (
-                  <img
-                    src={viewEyeIcon}
-                    alt="hide eye icon"
-                    width={20}
-                    height={20}
-                  />
-                ) : (
-                  <img
-                    src={hideEyeIcon}
-                    alt="view eye icon"
-                    width={20}
-                    height={20}
-                  />
-                )}
+                <img
+                  src={showPassword ? viewEyeIcon : hideEyeIcon}
+                  alt="eye icon"
+                  width={20}
+                  height={20}
+                />
               </span>
             </div>
+
             <button
               type="submit"
               id="login-btn"
-              disabled={!phone || !password}
-              onClick={handleSubmit}
+              disabled={!phoneValue || !passwordValue}
             >
               Войти
             </button>
           </form>
+
           <footer className="footer-title">©milliybiz</footer>
         </div>
       )}

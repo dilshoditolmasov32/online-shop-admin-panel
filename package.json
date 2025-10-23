@@ -16,6 +16,7 @@
     "@hookform/resolvers": "^5.2.2",
     "@mui/icons-material": "^7.3.4",
     "@mui/material": "^7.3.4",
+    "@react-input/mask": "^2.0.4",
     "axios": "^1.12.2",
     "js-cookie": "^3.0.5",
     "react": "^19.1.1",

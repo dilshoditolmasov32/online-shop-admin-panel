@@ -4,7 +4,7 @@ import CheckBox from "../checkbox/CheckBox";
 import user from "../../assets/images/user.svg";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "../../data/validationSchema";
+import { registerSchema } from "../../data/validationSchema";
 import "./Users.css";
 
 const Users = () => {
@@ -24,7 +24,7 @@ const Users = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(registerSchema),
   });
 
   const onSubmit = (data) => {
