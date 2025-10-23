@@ -9,7 +9,7 @@ const Input = ({
   name,
   register,
   errors,
-  type = "text",
+  type,
   buttonLabel,
   onButtonClick,
   ...props
@@ -45,7 +45,7 @@ const Input = ({
  
   const maskRef = (name === "phone" || type === "tel")
     ? useMask({
-        mask: "+998 (__) ___-__-__",
+        mask: "+998 (__) ___ __ __",
         replacement: { _: /\d/ },
       })
     : null;
