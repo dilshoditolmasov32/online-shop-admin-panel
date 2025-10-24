@@ -23,8 +23,8 @@ const Login = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    // e.preventDefault();
     console.log("Kirish ma'lumotlari:", {
       phone: phoneValue,
       password: passwordValue,
@@ -40,7 +40,7 @@ const Login = () => {
       ) : (
         <div className="login-page">
           <form className="login-form" 
-          // onClick={handleSubmit}
+          // onSubmit={handleSubmit}
           >
             <input
               type="text"
