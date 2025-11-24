@@ -210,7 +210,6 @@ export default function AccordionMenu() {
           <h4>Narx, So’m</h4>
           <div className="price-container">
             <NumericFormat
-              // value={values.numberformatOne}
               onChange={handleChange}
               customInput={TextField}
               thousandSeparator=" "
