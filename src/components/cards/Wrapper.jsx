@@ -12,85 +12,77 @@ const Wrapper = () => {
 
   const handleDateChange = (date) => {
     setPickedDate(date); 
-    // backendga yuborish:
-    // fetch("/api/date", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify({date}) })
+    
   }
 
   return (
     <>
-      <div class="cards-wrapper">
-        <div class="wrapper-card">
+      <div className="cards-wrapper">
+        <div className="wrapper-card">
           <div className="calendar-info-calendar">
-            <p>
-              
-              • {
-                pickedDate?`${pickedDate}`:"Сегодня"
-              }
-
-            </p>
+            <p>• {pickedDate ? `${pickedDate}` : "Сегодня"}</p>
             <div className="calendar-btn" onClick={handleClickCalendar}>
               Календарь
             </div>
           </div>
-          <div class="wrapper-card-info">
+          <div className="wrapper-card-info">
             сделка: <span>1 000</span>
           </div>
-          <div class="wrapper-card-info">
+          <div className="wrapper-card-info">
             на сумму: <span>1 000 000 000</span>
           </div>
         </div>
-        <div class="wrapper-card">
+        <div className="wrapper-card">
           <p>• Первичный контакты</p>
-          <div class="wrapper-card-info">
+          <div className="wrapper-card-info">
             сделка: <span>1 000</span>
           </div>
-          <div class="wrapper-card-info">
+          <div className="wrapper-card-info">
             на сумму: <span>1 000 000 000</span>
           </div>
         </div>
-        <div class="wrapper-card">
+        <div className="wrapper-card">
           <p>• Не дозвон</p>
-          <div class="wrapper-card-info">
+          <div className="wrapper-card-info">
             сделка: <span>1 000</span>
           </div>
-          <div class="wrapper-card-info">
+          <div className="wrapper-card-info">
             на сумму: <span>1 000 000 000</span>
           </div>
         </div>
-        <div class="wrapper-card">
+        <div className="wrapper-card">
           <p>• Принимают решение</p>
-          <div class="wrapper-card-info">
+          <div className="wrapper-card-info">
             сделка: <span>1 000</span>
           </div>
-          <div class="wrapper-card-info">
+          <div className="wrapper-card-info">
             на сумму: <span>1 000 000 000</span>
           </div>
         </div>
-        <div class="wrapper-card">
+        <div className="wrapper-card">
           <p>• Успешно реализовано</p>
-          <div class="wrapper-card-info">
+          <div className="wrapper-card-info">
             сделка: <span>1 000</span>
           </div>
-          <div class="wrapper-card-info">
+          <div className="wrapper-card-info">
             на сумму: <span>1 000 000 000</span>
           </div>
         </div>
-        <div class="wrapper-card">
+        <div className="wrapper-card">
           <p>• Закрыто реализовано</p>
-          <div class="wrapper-card-info">
+          <div className="wrapper-card-info">
             сделка: <span>1 000</span>
           </div>
-          <div class="wrapper-card-info">
+          <div className="wrapper-card-info">
             на сумму: <span>1 000 000 000</span>
           </div>
         </div>
       </div>
 
       <Calendar
-       showCalendar={showCalendar} 
-      setShowCalendar={setShowCalendar}
-      onDateChange={handleDateChange} 
-
+        showCalendar={showCalendar}
+        setShowCalendar={setShowCalendar}
+        onDateChange={handleDateChange}
       />
     </>
   );

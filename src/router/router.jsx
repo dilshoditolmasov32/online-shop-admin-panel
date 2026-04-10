@@ -6,14 +6,13 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import Home from "./pages/home/Home";
-import Layout from "./pages/Layout";
-import "./index.css";
-import Setting from "./pages/setting/Setting";
-import Web from "./pages/web/Web";
-import DealCards from "./pages/deal/DealCards";
-import WareHouse from "./pages/warehouse/WareHouse";
-import LoginForm from "./auth/login/Login";
+import Home from "../pages/home/Home";
+import Layout from "../pages/Layout";
+import "../index.css";
+import Setting from "../pages/setting/Setting";
+import Web from "../pages/web/Web";
+import DealCards from "../pages/deal/DealCards";
+import WareHouse from "../pages/warehouse/WareHouse";
 import {
   ProductId,
   EditProduct,
@@ -26,15 +25,25 @@ import {
   Block,
   Request,
   UploadBanner,
-} from "./components";
-import PrivateRoute from "./auth/private/PrivateRoute";
-import Login from "./auth/login/Login";
+} from "../components";
+import PrivateRoute from "../auth/private/PrivateRoute";
+import PublicRoute from "../auth/public/PublicRoute";
+import Login from "../auth/login/Login";
+import { ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AppRouter() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
         <Route
           path="/dashboard"
           element={
@@ -52,6 +61,7 @@ function AppRouter() {
             <Route path="products-list" element={<ProductsList />} />
             <Route index element={<Navigate to={"edit-product"} replace />} />
             <Route path="edit-product" element={<EditProduct />} />
+            <Route path="edit-product/:productId" element={<EditProduct />} />
           </Route>
 
           <Route path="web" element={<Web />}>
@@ -70,10 +80,28 @@ function AppRouter() {
             <Route path="users" element={<Users />} />
           </Route>
         </Route>
-      </>
-    )
+      </>,
+    ),
   );
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={909}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Slide}
+        closeButton={false}
+      />
+    </>
+  );
 }
 
 export default AppRouter;

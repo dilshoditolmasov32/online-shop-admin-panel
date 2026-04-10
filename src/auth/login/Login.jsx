@@ -1,89 +1,80 @@
 import { useEffect, useState } from "react";
 import hideEyeIcon from "../../assets/images/hideEyeIcon.png";
 import viewEyeIcon from "../../assets/images/viewEyeIcon.png";
+
 import "./Login.css";
 import { LoadingScreen } from "../../components";
-import { useNavigate } from "react-router-dom";
-import { useMask } from "@react-input/mask";
+import { useAuth } from "../../hooks/useAuth";
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [phoneValue, setPhoneValue] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
-  const navigate = useNavigate();
 
-  const inputRef = useMask({
-    mask: "+998 (__) ___ __ __",
-    replacement: { _: /\d/ },
-  });
+  const { signIn, loading: authLoading } = useAuth();
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSubmit = () => {
-    // e.preventDefault();
-    console.log("Kirish ma'lumotlari:", {
-      phone: phoneValue,
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await signIn({
+      email: emailValue,
       password: passwordValue,
+      device_name: "android",
     });
-    navigate("/dashboard");
-  
   };
 
+  if (loading) return <LoadingScreen />;
+
   return (
-    <>
-      {loading ? (
-        <LoadingScreen />
-      ) : (
-        <div className="login-page">
-          <form className="login-form" 
-          // onSubmit={handleSubmit}
+    <div className="login-page">
+      <form className="login-form" onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Email*"
+          value={emailValue}
+          onChange={(e) => setEmailValue(e.target.value)}
+          required
+        />
+
+        <div className="password-input">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Пароль*"
+            value={passwordValue}
+            onChange={(e) => setPasswordValue(e.target.value)}
+            required
+          />
+
+          <span
+            className="eye-icon"
+            onClick={() => setShowPassword((prev) => !prev)}
           >
-            <input
-              type="text"
-              placeholder="Номер телефона*"
-              ref={inputRef}
-              value={phoneValue}
-              onChange={(e) => setPhoneValue(e.target.value)}
+            <img
+              src={showPassword ? viewEyeIcon : hideEyeIcon}
+              alt="toggle password"
+              width={20}
+              height={20}
             />
-
-            <div className="password-input">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Пaроль*"
-                value={passwordValue}
-                onChange={(e) => setPasswordValue(e.target.value)}
-              />
-              <span
-                className="eye-icon"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                <img
-                  src={showPassword ? viewEyeIcon : hideEyeIcon}
-                  alt="eye icon"
-                  width={20}
-                  height={20}
-                />
-              </span>
-            </div>
-
-            <button
-              type="button"
-              id="login-btn"
-              disabled={!phoneValue || !passwordValue}
-              onClick={handleSubmit}
-            >
-              Войти
-            </button>
-          </form>
-
-          <footer className="footer-title">©milliybiz</footer>
+          </span>
         </div>
-      )}
-    </>
+
+        <button
+          type="submit"
+          id="login-btn"
+          disabled={!emailValue || !passwordValue || authLoading}
+        >
+          {authLoading ? "Загрузка..." : "Войти"}
+        </button>
+      </form>
+
+      <footer className="footer-title">© milliybiz</footer>
+    </div>
   );
 };
 

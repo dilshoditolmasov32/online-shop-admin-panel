@@ -1,21 +1,38 @@
-.modal-deleteBtn {
-  width: 100%;
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.modal-deleteBtn,
+.modal-cancelBtn {
   text-align: center;
+  border-radius: 12px;
+  padding: 14x 20px;
+  font-size: 18px;
+  font-weight: 700;
+  transition: opacity 0.2s ease;
+line-height: 150%;
+text-align: center;
+vertical-align: middle;
+font-family: "Neometric";
+
+}
+
+.modal-deleteBtn {
   color: #fff;
   background: #10355b;
-  border-radius: 12px;
-  margin: 0 auto;
-  padding: 18px 8px;
-  font-size: 20px;
-  font-weight: 700;
 }
 
-
-@media (max-width:1400px){
-  .modal-deleteBtn {
-  width: 100%;
-  padding: 10px;
-  font-size: 18px;
-  font-weight: 600;
-}  
+.modal-cancelBtn {
+  color: #10355b;
+  background: #fff;
+  border: 1px solid #10355b;
 }
+
+.modal-deleteBtn:disabled,
+.modal-cancelBtn:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+

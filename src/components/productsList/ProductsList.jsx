@@ -1,75 +1,151 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useCallback, useMemo, useState, memo, Children } from "react";
+import DOMPurify from "dompurify";
+import { Link } from "react-router-dom";
+import { Slide, toast } from "react-toastify";
+import { useProducts } from "../../hooks/useProducts";
 import "./ProductList.css";
 import Modal from "../modal/Modal";
 import Loading from "../loading/Loading";
-import { getProductsData } from "../../../service";
+
+const toastConfig = {
+  position: "bottom-right",
+  autoClose: 909,
+  hideProgressBar: true,
+  closeOnClick: false,
+  pauseOnHover: true,
+  draggable: true,
+  theme: "colored",
+  transition: Slide,
+  style: {
+    width: "100%",
+    borderRadius: "30px",
+    fontFamily: "Neometric",
+    fontSize: "14px",
+  },
+};
 
 const ProductList = () => {
   const [open, setOpen] = useState(false);
-  const [products, setProducts] = useState([]);
   const [selectedProductId, setSelectedProductId] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { products, loading, deleteProduct } = useProducts();
+console.log(products)
+  const selectedProduct = useMemo(
+    () => products?.find((product) => product.id === selectedProductId),
+    [products, selectedProductId],
+  );
 
-  useEffect(() => {
-    setLoading(true);
-    const fetchData = async () => {
-      try {
-        const productListData = await getProductsData();
-        setProducts(productListData?.results);
-      } catch (error) {
-        console.error("Productlarni olishda xatolik:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+  const handleDeleteProduct = useCallback((productId) => {
+    setSelectedProductId(productId);
+    setOpen(true);
   }, []);
 
-  const handleDeleteProduct = async (element) => {
-    setSelectedProductId(element);
-    setOpen(true);
-  };
+  const handleConfirmDelete = useCallback(async () => {
+    if (!selectedProductId) {
+      return;
+    }
+
+    try {
+      await deleteProduct(selectedProductId);
+      toast.success("Tovar muvaffaqiyatli o'chirildi", toastConfig);
+      setSelectedProductId(null);
+    } catch (error) {
+      toast.error(
+        error?.response?.data?.message ||
+          error?.message ||
+          "Tovarni o'chirib bo'lmadi",
+        toastConfig,
+      );
+      throw error;
+    }
+  }, [deleteProduct, selectedProductId]);
 
   return (
     <>
       <div className="products-section">
         <div className="product-line"></div>
         <h3 className="product-title">#Networks.</h3>
-           <Loading count={8}/>
         <div className="products">
           {loading ? (
-            <Loading count={8}/>
+            <Loading count={8} />
           ) : (
             <>
-              {/* {products?.map((element) => (
+              {products?.map((element) => (
                 <div className="product" key={element.id}>
-                  <div className="product-img">
-                    <img
-                      src={element.images[0]}
-                      alt="image"
-                      className="card-image"
-                    />
+                  <div
+                    className="product-img"
+                    onMouseEnter={(e) => {
+                      const imgs = element.images || [];
+                      if (imgs.length > 1) {
+                        e.currentTarget.dataset.index = "1";
+                        e.currentTarget.querySelector("img").src =
+                          imgs[1]?.original_image_url;
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      const imgs = element.images || [];
+                      e.currentTarget.dataset.index = "0";
+                      if (imgs.length > 0) {
+                        e.currentTarget.querySelector("img").src =
+                          imgs[0]?.original_image_url;
+                      }
+                    }}
+                  >
+                    {element.images?.length > 0 && (
+                      <img
+                        src={element.images[0]?.original_image_url}
+                        alt="image"
+                        className="card-image"
+                      />
+                    )}
+
+                    {/* dots */}
+                    {element.images?.length > 1 && (
+                      <div className="dots">
+                        {element.images.map((img, i) => (
+                          <span
+                            key={i}
+                            className="dot"
+                            onClick={(e) => {
+                              const parent =
+                                e.currentTarget.closest(".product-img");
+                              parent.querySelector("img").src =
+                                img.original_image_url;
+                            }}
+                          />
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  <div className="product-desc">{element.description.made}</div>
+                  <div
+                    className="product-desc"
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(element.description || ""),
+                    }}
+                  />
 
                   <div className="product-price">
-                    {" "}
-                    {element.final_price.slice(0, 7)} so'm
+                    {String(element.price || "").slice(0, 7)}
+                    so'm
                   </div>
+
                   <div className="product-buttons">
-                    <a href={"edit-product"}>
-                      <button className="product-editBtn">изменить</button>
-                    </a>
+                    <Link
+                      to={`/dashboard/warehouse/edit-product/${element.id}`}
+                    >
+                      <button type="button" className="product-editBtn">
+                        изменить
+                      </button>
+                    </Link>
                     <button
+                      type="button"
                       className="product-deleteBtn"
-                      onClick={() => handleDeleteProduct({ element })}
+                      onClick={() => handleDeleteProduct(element.id)}
                     >
                       удалить
                     </button>
                   </div>
                 </div>
-              ))} */}
+              ))}
             </>
           )}
         </div>
@@ -78,11 +154,12 @@ const ProductList = () => {
       <Modal
         open={open}
         setOpen={setOpen}
-        titleText={"Вы действительно хотите удалить?"}
-        selectedProductId={selectedProductId}
-        setSelectedProductId={setSelectedProductId}
-        setProducts={setProducts}
-        products={products}
+        titleText={`${
+          selectedProduct?.name || selectedProduct?.description || "Mahsulot"
+        } ni o'chirmoqchimisiz?`}
+        confirmText="O'chirish"
+        cancelText="Bekor qilish"
+        onConfirm={handleConfirmDelete}
       />
     </>
   );

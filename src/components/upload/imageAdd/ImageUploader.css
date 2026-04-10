@@ -2,15 +2,16 @@
   width: 100%;
   display: flex;
   gap: 10px;
-  background-color: #ECEDEF;
+  background-color: #ecedef;
   padding: 10px;
   border-radius: 10px;
   overflow-x: auto;
   margin-bottom: 20px;
-  border: 1px solid #B9B9B9;
+  border: 1px solid #b9b9b9;
 }
 
-.image-box, .add-box {
+.image-box,
+.add-box {
   width: 140px;
   height: 140px;
   background: white;
@@ -18,9 +19,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   flex-shrink: 0;
-  border: 2px dashed #D9D9D9 
+  border: 2px dashed #d9d9d9;
+  position: relative;
 }
 
 .image-box img {
@@ -32,14 +33,25 @@
 
 .add-box {
   border: 2px dashed #bbb;
-  font-size: 32px;
-  color: #999;
   transition: 0.3s;
+  cursor: pointer;
 }
-
-
 
 .add-box:hover {
   border-color: #666;
-  color: #333;
+}
+
+.image-remove-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(16, 53, 91, 0.9);
+  color: #fff;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

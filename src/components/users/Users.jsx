@@ -1,20 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Input from "../input/Input";
 import CheckBox from "../checkbox/CheckBox";
 import user from "../../assets/images/user.svg";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../../data/validationSchema";
+import { useUsers } from "../../hooks/useUsers";
 import "./Users.css";
 
 const Users = () => {
   const [UserImage, setUserImage] = useState(user);
-  const [superVisitorRole, setSuperVisitorRole] = useState(false);
-  const [marketingRole, setMarketingRole] = useState(false);
-  const [menegerRole, setMenegerRole] = useState(false);
-  const [calCenterRole, setCallCenterRole] = useState(false);
   const [selectedRole, setSelectedRole] = useState(null);
-
+  const { users, loading } = useUsers({ limit: 1 }, true);
+  const [currentUser, setCurrentUser] = useState(null);
+  
   const handleRoleChange = (role) => {
     setSelectedRole(selectedRole === role ? null : role);
   };
@@ -37,11 +36,19 @@ const Users = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setUserImage(reader.result);
-        qaytadi;
       };
       reader.readAsDataURL(file);
     }
   };
+
+  useEffect(() => {
+    if (users && users.length > 0) {
+      setCurrentUser(users[0]);
+      if (users[0]?.role) {
+        setSelectedRole(users[0].role);
+      }
+    }
+  }, [users]);
 
   return (
     <>
@@ -49,7 +56,11 @@ const Users = () => {
         <div id="userImage-container">
           <h3>#Networks</h3>
           <div className="avatar-container">
-            <img src={UserImage} alt="user image" id="user-photo" />
+            <img
+              src={currentUser?.avatar || UserImage}
+              alt="user image"
+              id="user-photo"
+            />
             <input
               type="file"
               name="photo upload"
@@ -62,7 +73,7 @@ const Users = () => {
         <div className="user-profile-data">
           <Input
             title={"Имя фамилия"}
-            text={"Одылов Мухаммад Бобур"}
+            text={currentUser?.name || currentUser?.full_name || ""}
             editData={"Изменить"}
             name="name"
             errors={errors}
@@ -70,7 +81,7 @@ const Users = () => {
           />
           <Input
             title={"Номер телефона"}
-            text={"+998 90 999 99 99"}
+            text={currentUser?.phone || ""}
             editData={"Изменить"}
             name="phone"
             register={register}
@@ -103,7 +114,11 @@ const Users = () => {
               disabled={selectedRole !== null && selectedRole !== "callCenter"}
             />
           </div>
-          <Input title={"Пароль"} text={"MB2003"} editData={"Изменить"} />
+          <Input
+            title={"Пароль"}
+            text={currentUser?.password || ""}
+            editData={"Изменить"}
+          />
         </div>
       </form>
     </>

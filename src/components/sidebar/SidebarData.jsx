@@ -24,6 +24,7 @@ const SidebarData = () => {
           <li key={value.id} className="list-element">
             <NavLink
               to={value.link}
+              end={value.link === "/dashboard"}
               className={({ isActive }) =>
                 isActive ? "sidebar-link active" : "sidebar-link"
               }

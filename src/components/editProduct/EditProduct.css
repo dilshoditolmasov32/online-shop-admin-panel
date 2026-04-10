@@ -2,15 +2,71 @@
   width: 100%;
 }
 
-.product-name-count,
-.product-brand,
-.product-code,
-.product-price {
+.edit-product-actions {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.edit-product-heading {
+  font-size: 24px;
+  line-height: 1.1;
+  margin-bottom: 4px;
+  margin-bottom: 12px;
+  color: #10355b;
+}
+
+.edit-product-subtitle {
+  color: #7d7d7d;
+  font-size: 15px;
+}
+
+.edit-product-action-buttons {
   display: flex;
   gap: 10px;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.edit-product-submit,
+.edit-product-cancel,
+.edit-product-advanced-button {
+  min-width: 140px;
+  padding: 14px 20px;
+  border-radius: 9px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.edit-product-submit {
+  background: #10355b;
+  color: #fff;
+}
+
+.edit-product-cancel {
+  border: 1px solid #10355b;
+  color: #10355b;
+  background: #fff;
+}
+
+.edit-product-advanced-button {
+  border: 1px dashed #10355b;
+  color: #10355b;
+  background: #f7fafc;
+}
+
+.edit-product-submit:disabled,
+.edit-product-cancel:disabled,
+.edit-product-advanced-button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.editProduct-section {
+  margin-top: 24px;
 }
 
 .product-title,
@@ -18,10 +74,78 @@
   font-weight: 600;
   font-size: 20px;
   line-height: 38px;
-  vertical-align: middle;
   color: #000;
   margin-bottom: 5px;
   margin-top: 20px;
+}
+
+.editProduct-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.editProduct-grid.one-column {
+  grid-template-columns: 1fr;
+}
+
+.editProduct-grid.two-columns {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editProduct-grid.three-columns {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.edit-field {
+  width: 100%;
+}
+
+.edit-field-label {
+  display: block;
+  font-size: 18px;
+  color: #000;
+  margin-bottom: 6px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.37px;
+}
+
+.edit-field-label span {
+  color: #d92d20;
+  margin-left: 4px;
+}
+
+.edit-field-input,
+.edit-field-textarea {
+  width: 100%;
+  border: 1px solid #b9b9b9;
+  border-radius: 9px;
+  padding: 14px 16px;
+  font-size: 18px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  background: #fff;
+}
+
+.edit-field-input:focus,
+.edit-field-textarea:focus {
+  border-color: #10355b;
+}
+
+.edit-field-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.edit-field-input.has-error,
+.edit-field-textarea.has-error {
+  border-color: #d92d20;
+}
+
+.edit-field-error {
+  color: #d92d20;
+  font-size: 13px;
+  margin-top: 6px;
 }
 
 .product-checkbox {
@@ -29,61 +153,84 @@
   width: 100%;
   gap: 20px;
 }
-.new-product {
+
+.edit-status-grid,
+.edit-category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.edit-product-loading,
+.edit-product-empty,
+.edit-product-empty-inline {
+  color: #7d7d7d;
+  font-size: 18px;
+}
+
+.edit-product-actions-buttons{
+  width: 100%;
+  
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 20px;
-  border: 1px solid #b9b9b9;
-  border-radius: 9px;
-  width: 100%;
+  justify-content: end;
+  margin: 20px 0;
 }
 
-.new-product h3 {
-  font-weight: 400;
-  font-style: Regular;
-  font-size: 20px;
-  line-height: 20.05px;
-  letter-spacing: -0.37px;
-}
-.checkbox-wrapper {
-  position: relative;
-  width: 28px;
-  height: 28px;
-  display: inline-block;
-  cursor: pointer;
+.edit-product-advanced-toggle {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
 }
 
-.custom-checkbox {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 100%;
-  height: 100%;
-  background: #d9d9d9;
-  border-radius: 6px;
-  cursor: pointer;
-  padding: 7px;
+.edit-product-advanced-panel {
+  margin-top: 8px;
 }
 
-.check-icon {
-  position: absolute;
-  left: 6px;
-  top: 7px;
-  width: 16px;
-  height: 12px;
-  display: none;
-  pointer-events: none;
-}
-
-.custom-checkbox:checked + .check-icon {
-  display: block;
+.edit-product-advanced-section {
+  padding: 20px;
+  border: 1px solid #e3ebf3;
+  border-radius: 14px;
+  background: #fbfdff;
 }
 
 @media (max-width: 1500px) {
   .product-title,
   .product-state {
-    font-weight: 600;
     font-size: 18px;
     margin-top: 10px;
+  }
+
+  .edit-field-label {
+    font-size: 16px;
+  }
+
+  .edit-field-input,
+  .edit-field-textarea {
+    font-size: 16px;
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .editProduct-grid.two-columns,
+  .editProduct-grid.three-columns,
+  .edit-status-grid,
+  .edit-category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-product-actions-buttons,
+  .edit-product-advanced-toggle {
+    justify-content: stretch;
+  }
+
+  .edit-product-action-buttons {
+    width: 100%;
+  }
+
+  .edit-product-submit,
+  .edit-product-cancel,
+  .edit-product-advanced-button {
+    width: 100%;
   }
 }

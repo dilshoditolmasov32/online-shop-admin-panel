@@ -2,32 +2,34 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { deleteProductData } from "../../../service";
 import "./Modal.css";
-import { useTheme } from "@emotion/react";
-import { useMediaQuery } from "@mui/material";
 
 export default function BasicModal({
   open,
   setOpen,
-  titleText,
-  selectedProductId,
-  setSelectedProductId,
-  products,
-  setProducts,
+  onConfirm,
+  confirmText = "Delete",
+  cancelText = "Bekor qilish",
 }) {
-  const handleClose = () => setOpen(false);
-  const handleDeleteProduct = async () => {
-    const id = selectedProductId.element.id;
+  const [submitting, setSubmitting] = React.useState(false);
+
+  const handleClose = () => {
+    if (!submitting) {
+      setOpen(false);
+    }
+  };
+
+  const handleConfirm = async () => {
+    if (typeof onConfirm !== "function" || submitting) {
+      return;
+    }
 
     try {
-      await deleteProductData(id);
+      setSubmitting(true);
+      await onConfirm();
       setOpen(false);
-      window.location.reload();
-      setProducts(products?.filter((item) => item.id !== id));
-      setSelectedProductId(null);
-    } catch (error) {
-      error;
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -50,8 +52,8 @@ export default function BasicModal({
             xs: "90%",
             sm: "350px",
             md: "400px",
-              lg: "450px", 
-            xl:"600px"
+            lg: "450px",
+            xl: "600px",
           },
           bgcolor: "background.paper",
           border: "1px solid #000",
@@ -73,11 +75,27 @@ export default function BasicModal({
             color: "#000",
           }}
         >
-          {titleText}
+          Вы действительно хотите удалить?
         </Typography>
-        <button onClick={handleDeleteProduct} className="modal-deleteBtn">
-          Удалить
-        </button>
+
+        <div className="modal-actions">
+          <button
+            type="button"
+            onClick={handleClose}
+            className="modal-cancelBtn"
+            disabled={submitting}
+          >
+            {cancelText}
+          </button>
+          <button
+            type="button"
+            onClick={handleConfirm}
+            className="modal-deleteBtn"
+            disabled={submitting}
+          >
+            {submitting ? "O'chirilmoqda..." : confirmText}
+          </button>
+        </div>
       </Box>
     </Modal>
   );

@@ -28,7 +28,6 @@ const Calendar = ({ showCalendar, setShowCalendar, onDateChange }) => {
     return day === 0 ? 6 : day - 1;
   };
 
-  // Sana formatlash: DD-MM-YYYY
   const formatDateLocal = (dateObj) => {
     const d = String(dateObj.getDate()).padStart(2, "0");
     const m = String(dateObj.getMonth() + 1).padStart(2, "0");
