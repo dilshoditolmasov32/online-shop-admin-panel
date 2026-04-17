@@ -3,7 +3,6 @@ import check from "../../assets/images/check.svg";
 import "./CheckBox.css";
 
 const CheckBox = ({ title, checked, defaultChecked, onChange, disabled }) => {
-    console.log(title, 'disabled:', disabled); // bu qatorni qo'shing
   const [internalChecked, setInternalChecked] = useState(
     defaultChecked || false
   );

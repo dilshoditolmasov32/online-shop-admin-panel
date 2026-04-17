@@ -18,6 +18,7 @@ export const useOrders = (initialParams = {}, autoLoad = true) => {
 
       try {
         const response = await orderService.getOrders(params);
+        console.log("order", response)
         const items = Array.isArray(response)
           ? response
           : (response?.data ?? response);

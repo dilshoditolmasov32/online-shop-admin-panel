@@ -275,3 +275,75 @@
   font-size: 14px;
   color: #000;
 }
+
+.deal-card-skeleton {
+  cursor: default;
+  animation: dealPulse 1.5s ease-in-out infinite;
+}
+
+.deal-skeleton-line,
+.deal-skeleton-block,
+.deal-skeleton-chip,
+.deal-skeleton-tag,
+.deal-skeleton-date {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+}
+
+.deal-skeleton-title {
+  width: 68%;
+  height: 22px;
+  margin-bottom: 10px;
+}
+
+.deal-skeleton-number {
+  width: 88px;
+  height: 18px;
+  margin-left: auto;
+  margin-bottom: 10px;
+}
+
+.deal-skeleton-sum {
+  width: 100%;
+  height: 58px;
+  margin-bottom: 10px;
+}
+
+.deal-skeleton-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.deal-skeleton-chip {
+  width: 46%;
+  height: 30px;
+}
+
+.deal-skeleton-tag {
+  width: 92px;
+  height: 28px;
+}
+
+.deal-skeleton-date-group {
+  display: flex;
+  gap: 6px;
+}
+
+.deal-skeleton-date {
+  width: 74px;
+  height: 28px;
+}
+
+@keyframes dealPulse {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

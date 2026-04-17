@@ -26,7 +26,7 @@ api.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       removeAccessToken();
-      toast.error("Session expired. Please log in again.");
+      toast.error("Iltimos qaytadan urinib ko'ring");
       window.location.href = "/";
     }
     return Promise.reject(error);

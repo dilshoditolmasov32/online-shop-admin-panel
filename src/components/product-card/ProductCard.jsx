@@ -1,162 +1,211 @@
-import { useEffect, useRef, useState } from "react";
 import CheckBox from "../checkbox/CheckBox";
 import Input from "../input/Input";
 import photo from "../../assets/images/photo.svg";
 import "./ProductCard.css";
 
-const ProductList = () => {
-  const options = [
-    { id: "1", label: "Реклама" },
-    { id: "2", label: "Сделки в шоуруме" },
-    { id: "3", label: "Не дозвон" },
-    { id: "4", label: "Принимают решение" },
-    { id: "5", label: "Успешно реализовано" },
-    { id: "6", label: "Закрыто не реализовано" },
-  ];
+const getDateTime = (value) => {
+  if (!value) {
+    return "-";
+  }
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const dropdownRef = useRef(null);
+  const dateValue = new Date(value);
+  return `${dateValue.toLocaleDateString("ru-RU")} ${dateValue.toLocaleTimeString(
+    "ru-RU",
+    {
+      hour: "2-digit",
+      minute: "2-digit",
+    },
+  )}`;
+};
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
+const getProductImage = (product) => {
+  const images = product?.images || [];
+  const firstImage = images[0];
 
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
-    setIsOpen(false);
-  };
+  return (
+    firstImage?.original_image_url ||
+    firstImage?.url ||
+    firstImage?.path ||
+    firstImage?.small_image_url ||
+    firstImage?.medium_image_url ||
+    photo
+  );
+};
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
+const getCategoryNames = (product, order) => {
+  const categories = product?.categories;
 
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        setIsOpen(false);
-      }
-    };
+  if (Array.isArray(categories) && categories.length) {
+    return categories
+      .map((category) => category?.name || category?.title || category)
+      .filter(Boolean);
+  }
 
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleKeyDown);
+  const rootCategory =
+    order?.channel?.root_category?.translations?.find((item) => item?.name)
+      ?.name;
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
+  return rootCategory ? [rootCategory] : [];
+};
+
+const getDiscountText = (order) => {
+  if (!order) {
+    return "-";
+  }
+
+  if (Number(order.discount_percent) > 0) {
+    return `${order.discount_percent}%`;
+  }
+
+  return order.formatted_discount_amount || "0 so'm";
+};
+
+const getStatusFlags = (status) => ({
+  processing: status === "processing" || status === "shipping" || status === "completed",
+  shipping: status === "shipping" || status === "completed",
+  canceled: status === "canceled",
+});
+
+const ProductList = ({ order, productsById = {}, loading, error }) => {
+  const customerName =
+    order?.customer?.name ||
+    `${order?.customer_first_name || ""} ${order?.customer_last_name || ""}`.trim();
+  const statusFlags = getStatusFlags(order?.status);
+  const items = order?.items || [];
+
+  if (loading) {
+    return (
+      <div className="productId-data">
+        <div className="product-card-panel-skeleton" />
+        <div className="product-card-panel-skeleton tall" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="productId-data">
+        <div className="product-card-error">{error}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="productId-data">
       <h3>Ma'lumotlar</h3>
       <div className="fullname-phone-data">
         <Input
-          title={"Ism Familiya "}
-          text={"Шорустамов Шохрух"}
-          editData={"Готово"}
+          title="Ism Familiya"
+          text={customerName || "-"}
+          readOnly
+          showEditButton={false}
         />
-        <Input title={"Telefon raqam"} text={"+998 "} editData={"Изменить"} />
+        <Input
+          title="Telefon raqam"
+          text={
+            order?.billing_address?.phone ||
+            order?.shipping_address?.phone ||
+            order?.customer?.phone ||
+            "-"
+          }
+          readOnly
+          showEditButton={false}
+        />
       </div>
       <div className="city-time-data">
-        <Input title={"Shahar"} text={"Toshkent"} editData={"Готово"} />
         <Input
-          title={"Vaqti"}
-          text={"01.08.2025 10:44"}
-          editData={"Изменить"}
+          title="Shahar"
+          text={
+            order?.billing_address?.city ||
+            order?.shipping_address?.city ||
+            order?.shipping_address?.state ||
+            "-"
+          }
+          readOnly
+          showEditButton={false}
+        />
+        <Input
+          title="Vaqti"
+          text={getDateTime(order?.created_at)}
+          readOnly
+          showEditButton={false}
         />
       </div>
       <div className="product-container">
-        <div className="product-card">
-          <div className="productId-image-data">
-            <div className="productList-image">
-              <img src={photo} alt="Product" className="productId-image" />
-            </div>
-            <div>
-              <h3>
-                Шифоныя парта 150х80 см <span>36%</span>
-              </h3>
-              <p>ID: 546465451</p>
-            </div>
-          </div>
-          <div className="product-details">
-            <p>
-              <del>5 900 000 so’m</del>
-            </p>
-            <p className="product-price">5 600 000 so'm</p>
-            <p className="maxsulot-narxi">Maxsulot narxi</p>
-          </div>
-        </div>
+        {items.length ? (
+          items.map((item) => {
+            const product =
+              productsById[item?.product_id || item?.additional?.product_id];
+            const categories = getCategoryNames(product, order);
+            const image = getProductImage(product);
+            const specialPrice = product?.special_price;
+            const basePrice = product?.price;
 
-        <div className="product-card">
-          <div className="productId-image-data">
-            <div className="productList-image ">
-              <img src={photo} alt="Product" className="productId-image" />
-            </div>
-            <div>
-              <h3>
-                Шифоныя парта 150х80 см <span>36%</span>
-              </h3>
-              <p>ID: 546465451</p>
-            </div>
-          </div>
-          <div className="product-details">
-            <p>Maxsulot narxi:</p>
-            <p className="productId-price">
-              <del>5 900 000 so'm</del>
-            </p>
-            <h3 className="productId-discount-price">5 600 000 so’m</h3>
-          </div>
-        </div>
+            return (
+              <div className="product-card" key={item.id}>
+                <div className="productId-image-data">
+                  <div className="productList-image">
+                    <img src={image} alt={item.name} className="productId-image" />
+                  </div>
+                  <div>
+                    <h3>{item.name}</h3>
+                    <p>ID: {item.product_id || item?.additional?.product_id || "-"}</p>
+                    <p>SKU: {item.sku || "-"}</p>
+                    <p>
+                      Kategoriya:{" "}
+                      {categories.length ? categories.join(", ") : "Topilmadi"}
+                    </p>
+                    <p>Miqdori: {item.qty_ordered || item.qty || 0} ta</p>
+                  </div>
+                </div>
+                <div className="product-details">
+                  {specialPrice && basePrice && specialPrice !== basePrice ? (
+                    <p>
+                      <del>{`${basePrice} so'm`}</del>
+                    </p>
+                  ) : null}
+                  <p className="product-price">
+                    {item.formatted_price || item.formatted_total || "-"}
+                  </p>
+                  <p className="maxsulot-narxi">Mahsulot narxi</p>
+                  <p className="product-item-total">
+                    Jami: {item.formatted_total || item.formatted_grand_total || "-"}
+                  </p>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <div className="product-card-empty">Mahsulotlar topilmadi.</div>
+        )}
 
         <div className="product-position-data">
-          <CheckBox title={"Jarayonda"} />
-          <CheckBox title={"Yetkazib berildi"} />
-          <CheckBox title={"Bekor qilindi"} />
+          <CheckBox title="Jarayonda" checked={statusFlags.processing} disabled />
+          <CheckBox title="Yetkazib berildi" checked={statusFlags.shipping} disabled />
+          <CheckBox title="Bekor qilindi" checked={statusFlags.canceled} disabled />
         </div>
       </div>
 
       <div className="productId-price-disCount-data">
         <Input
-          title={"Narxi, so’m"}
-          text={"10 000 000 so’m"}
-          editData={"Готовo"}
-        
+          title="Narxi"
+          text={order?.formatted_grand_total || "-"}
+          readOnly
+          showEditButton={false}
         />
-        <Input title={"Chegirma"} text={"35%"} editData={"Изменить"} />
+        <Input
+          title="Chegirma"
+          text={getDiscountText(order)}
+          readOnly
+          showEditButton={false}
+        />
 
-        <div className="select-option">
+        <div className="select-option product-status-box">
           <h6>Mahsulot holati</h6>
-          <div className="triangle-select" ref={dropdownRef}>
-            <div
-              className={`triangle-select-header ${isOpen ? "open" : ""}`}
-              onClick={toggleDropdown}
-            >
-              <span className="triangle-select-title">
-                {selectedOption ? selectedOption.label : "Holatni tanlang"}
-              </span>
-              <div className={`triangle-arrow ${isOpen ? "rotated" : ""}`} />
-            </div>
-
-            {isOpen && (
-              <div className="triangle-dropdown">
-                <div className="triangle-dropdown-content">
-                  {options.map((option) => (
-                    <div
-                      key={option.id}
-                      className={`triangle-option ${
-                        selectedOption?.id === option.id ? "selected" : ""
-                      }`}
-                      onClick={() => handleOptionClick(option)}
-                    >
-                      {option.label}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+          <div className="triangle-select-header product-status-readonly">
+            <span className="triangle-select-title">
+              {order?.status_label || order?.status || "-"}
+            </span>
           </div>
         </div>
       </div>

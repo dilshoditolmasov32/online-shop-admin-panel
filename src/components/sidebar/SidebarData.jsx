@@ -9,7 +9,7 @@ import "./SidebarData.css";
 
 const pageData = [
   { id: 1, title: "Рабочий стол", icon: <HomeIcon fill="#10355B"  />, link: "/dashboard" },
-  { id: 2, title: "Сделка", icon: <DealIcon  fill="#10355B" />, link: "/dashboard/deal" },
+  { id: 2, title: "Сделка", icon: <DealIcon  fill="#10355B" />, link: "/dashboard/deals" },
   { id: 3, title: "Склад", icon: <StoreIcon fill="#10355B" />, link: "/dashboard/warehouse" },
   { id: 4, title: "Website", icon: <WebIcon fill="#10355B"/>, link: "/dashboard/web" },
   { id: 5, title: "Настройка", icon: <SettingIcon fill="#10355B" />, link: "/dashboard/setting" },

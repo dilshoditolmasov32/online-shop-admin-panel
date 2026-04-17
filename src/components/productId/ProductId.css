@@ -117,3 +117,68 @@ linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
   display: flex;
   gap: 5px;
 }
+
+.productId-empty-card,
+.productId-error {
+  background: #fff;
+  border: 1px solid #b9b9b9;
+  border-radius: 8px;
+  padding: 16px;
+  color: #10355b;
+}
+
+.productId-error {
+  margin-top: 10px;
+  color: #d92d20;
+}
+
+.productId-card-skeleton {
+  animation: productIdPulse 1.4s ease-in-out infinite;
+}
+
+.productId-skeleton-line,
+.productId-skeleton-block,
+.productId-skeleton-chip,
+.productId-skeleton-date {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 8px;
+}
+
+.productId-skeleton-title {
+  width: 70%;
+  height: 24px;
+  margin-bottom: 12px;
+}
+
+.productId-skeleton-sum {
+  width: 100%;
+  height: 56px;
+  margin-bottom: 12px;
+}
+
+.productId-skeleton-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.productId-skeleton-chip {
+  width: 50%;
+  height: 30px;
+}
+
+.productId-skeleton-date {
+  width: 92px;
+  height: 28px;
+}
+
+@keyframes productIdPulse {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

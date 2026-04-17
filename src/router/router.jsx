@@ -53,8 +53,8 @@ function AppRouter() {
           }
         >
           <Route index element={<Home />} />
-          <Route path="deal" element={<DealCards />} />
-          <Route path="deal/:productId" element={<ProductId />} />
+          <Route path="deals" element={<DealCards />} />
+          <Route path="deals/:id" element={<ProductId />} />
 
           <Route path="warehouse" element={<WareHouse />}>
             <Route index element={<Navigate to={"products-list"} replace />} />

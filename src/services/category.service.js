@@ -1,6 +1,6 @@
 import api from "../api/axios";
 
-const unwrapResponseData = (response) => response.data?.data ?? response.data;
+const unwrapResponseData = (response) =>  response.data;
 
 const normalizeIds = (ids = []) =>
   ids
